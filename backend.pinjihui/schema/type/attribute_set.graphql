@@ -1,0 +1,14 @@
+type AttributeSet {
+    id: ID!
+    name: String!
+    # 属性集合
+    attributes: [Attribute]
+}
+
+# 创建属性输入
+input AttributeSetInput {
+    # 名称
+    name: String!
+    # 属性ID集合
+    attribute_ids: [String!]
+}

@@ -1,0 +1,16 @@
+type Statistic {
+    # 订单总金额
+    total: Float
+    # 总成本
+    cost: Float
+    # 总优惠
+    discount: Float
+    # 总提成
+    bonus: Float
+    # 盈利
+    profit: Float
+    # 畅销商品
+    bestSaleProduct: [Product]
+    # 收藏商品
+    favoriteProduct: [Product]
+}

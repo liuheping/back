@@ -1,0 +1,10 @@
+# 支付方式 结构
+type Payment {
+    id: ID!
+    # 支付方法名称
+    payName: String!
+    # 描述
+    payDesc: String
+    # 是否在线支付
+    isOnline: Boolean!
+}

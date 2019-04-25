@@ -1,0 +1,14 @@
+type OrderAddress {
+    # id: ID!
+    # mobie: String!
+    # consignee: String!
+    # address: Address!
+    # zipcode: String
+    # 收货人
+    consignee: String!
+	zipcode: String
+	mobile: String!
+	areaID: Int!
+	regionName: String 
+	address: String!
+}

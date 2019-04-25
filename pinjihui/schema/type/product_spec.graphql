@@ -1,0 +1,8 @@
+type ProductSpec {
+    # 规格1名字
+    spec1Name: String!
+    # 规格2名字
+    spec2Name: String
+    # 规格列表
+    specItems: [ProductSpecItem!]!
+}

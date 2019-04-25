@@ -1,0 +1,11 @@
+type ProductSpecItem {
+    id: ID!
+    # 规格1值
+    spec1: String!
+    # 规格2值
+    spec2: String
+    # 当前规格价格
+    price: Float!
+    # 该规格库存
+    stock: Int!
+}

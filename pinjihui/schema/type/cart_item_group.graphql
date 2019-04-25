@@ -1,0 +1,6 @@
+# 购物车商品数据结构
+type CartItemGroup {
+    items: [CartItem!]!
+    merchant: Merchant!
+    shippingMethods: [ShippingMethod!]!
+}

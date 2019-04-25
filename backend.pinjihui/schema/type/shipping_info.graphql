@@ -1,0 +1,25 @@
+
+# 物流信息数据结构
+type ShippingInfo {
+    id: ID!
+    # 订单
+    order: Order!
+    # 承运公司
+    company: String
+    # 快递单号
+    delivery_number: String
+    # 快递图片
+    images: [String!]
+}
+
+# 创建配送地址输入
+input ShippingInfoInput {
+    # 订单
+    order_id: ID!
+    # 承运公司
+    company: String
+    # 快递单号
+    delivery_number: String
+    # 快递图片
+    images: [String!]
+}

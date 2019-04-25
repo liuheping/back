@@ -1,0 +1,12 @@
+type ProductImage {
+    id: ID!
+    productID: ID!
+    # 小图
+    samllImage: String
+    # 中图
+    mediumImage: String
+    # 大图
+    bigImage: String!
+    # 创建时间
+    created_at: Time!
+}

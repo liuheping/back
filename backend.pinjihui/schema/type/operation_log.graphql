@@ -1,0 +1,27 @@
+type OperationLog {
+    id: ID!
+    # 用户
+    user: User!
+    # 操作
+    action: String!
+    # 值
+    createdAt: Time!
+}
+
+
+# 排序依据枚举
+enum OperationLogOrderBy {
+    created_at
+}
+
+# 日志排序参数结构
+input OperationLogSortInput {
+    orderBy: OperationLogOrderBy!
+    sort: SortType
+}
+
+# 日志搜索数据结构
+input OperationLogSearchInput {
+    key: String
+    userID: ID
+}

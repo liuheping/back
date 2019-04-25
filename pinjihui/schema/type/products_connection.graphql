@@ -1,0 +1,7 @@
+# 产品列表的连接模型, 深入理解请参阅 http://graphql.cn/learn/pagination/
+type ProductsConnection {
+    totalCount: Int!
+    edges: [ProductsEdge]
+    products: [Product]
+    pageInfo: PageInfo!
+}

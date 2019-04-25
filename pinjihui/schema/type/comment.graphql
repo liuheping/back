@@ -1,0 +1,41 @@
+# 评论数据结构
+type Comment {
+    id: ID!
+    # 评论者
+    user: CommentUser!
+    # 星级 1,2,3,4,5
+    rank: Int!
+    # 评论类容
+    content: String!
+    createdAt: Time!
+    # 回复
+    reply: String
+    # 图片
+    images: [String!]!
+    # 商品规格
+    productSpec: [Attribute!]!
+}
+
+# 评论用户
+type CommentUser {
+    name: String!
+    avatarUrl: String
+}
+
+# 创建评论参数
+input CommentInput {
+    # 订单产品id
+    orderProductID: ID!
+    # 评价等级　
+    rank: Int!
+    # 评论内容
+    content: String!
+    # 上传图片路径．目前为七牛对象存储的key
+    imageUrls: [String!]
+    # 是否匿名
+    isAnonymous: Boolean!
+    # 物流服务等级
+    shippingRank: Int!
+    # 服务态度等级
+    serviceRank: Int!
+}

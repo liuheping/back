@@ -1,0 +1,10 @@
+# 产品图片结构
+type ProductImage {
+    id: ID!
+    # 缩略图, 不大于 100x100px
+    samllImage: String!
+    # 中图 大约500x500px
+    mediumImage: String!
+    # 大图
+    bigImage: String!
+}

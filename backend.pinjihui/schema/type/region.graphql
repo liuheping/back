@@ -1,0 +1,6 @@
+type Region {
+    id: Int!
+    parent_id: Int!
+    name: String!
+    sort_order: Int
+}

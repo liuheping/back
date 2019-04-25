@@ -1,0 +1,46 @@
+type Coupon {
+    id: ID!
+    # 描述
+    description: String!
+    # 面额
+    value: Float!
+    # 创建时间
+    createdAt: Time!
+    # 更新时间
+    updatedAt: Time!
+    # 满多少使用
+    limitAmount: Float
+    # 过期时间
+    expiredAt: Time
+    # 数量
+    quantity: Int!
+    # 类型
+    type: String!
+    # 开始时间
+    startAt: Time
+    # 商家资料
+    merchant: MerchantProfile
+    # 有效天数
+    validity_days: Int
+}
+
+# 创建优惠券输入
+input CouponInput {
+    description: String!
+    value: Float!
+    limitAmount: Float
+    expiredAt: Time
+    quantity: Int!
+    type: CouponType!
+    startAt: Time
+    validity_days: Int
+}
+
+enum CouponType {
+    for_newer
+    for_inviter
+    simple
+    for_sharer
+    for_be_sharer
+    for_first_login
+}

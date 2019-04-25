@@ -1,0 +1,1772 @@
+﻿# 注册
+mutation {
+  register(
+    mobile: "13540069749"
+    password: "123456"
+    type:ally
+    code:"1234"
+  ) {
+    id,
+    mobile,
+    tokenString
+  }
+}
+
+# 登陆
+query{
+  login(
+    mobile:"13540069749"
+    password:"123456"
+  ) {
+    id
+    tokenString
+    type
+  }
+}
+
+
+
+# 获取当前会话用户信息
+query {
+  me{
+    mobile
+    email
+    type
+    tokenString
+    lastIp
+    userProfile{
+    	... on MerchantProfile{
+        companyName
+        companyImage
+        companyAddress {
+          regionName
+        }
+        shippingAddress{
+          consignee
+          zipcode
+          id
+          address {
+            regionName
+          }
+        }
+      }
+      
+     ... on CustomerProfile{
+            shippingAddress{
+              consignee
+              zipcode
+              id
+              address {
+                regionName
+              }
+            }
+            wechartProfile{
+              openid
+              nickname
+              language
+              gender
+              avatarUrl
+              user {
+                id
+                name
+              }
+            }
+          }
+      
+    }
+  }
+}
+
+
+
+# 找回密码
+mutation{
+  retrievePassword(mobile:"13540069749",code:"1234",newpassword:"123456"){}
+}
+
+#修改当前会话用户密码
+mutation{
+  changePassword(oldpassword:"123",newpassword:"123456"){}
+}
+
+# 获取配置信息列表
+query{
+  configs{
+    id
+    code
+    name
+    value
+    sortorder
+    description
+  }
+}
+
+# 根据ID查找配置
+query{
+  config(id:"bc3rqk72oau1k5cvsrdg"){
+    id
+    name
+    code
+    value
+    sortorder
+    description
+  }
+}
+
+# 删除配置
+mutation{
+  deleteConfig(ID:"bc3rp2f2oau1k5cvsrd0"){
+  }
+}
+
+# 修改配置
+mutation{
+  updateConfig(
+    id:"bc5mk6n2oau0r8ddf3qg",
+    NewCon:{
+      name:"网站名称"
+      code:"web_name"
+      value:"拼机惠"
+      description:"网站名称配置"
+      sortorder:255
+    }
+  ) {
+    id
+  }
+}
+
+# 创建配置
+mutation{
+  createConfig(
+    NewCon:{
+      name:"网站名称"
+      code:"web_name"
+      value:"拼机惠官网"
+      description:"全局网站名称配置"
+      sortorder:255
+    }
+  ) {
+    id
+  }
+}
+
+# 获取支付方式列表
+query{
+  payments{
+    id
+    payName
+    payFee
+    payCode
+    payDesc
+    enabled
+    sortOrder
+    isCod
+    isOnline
+  }
+}
+
+# 根据ID查找支付方式
+query{
+  payment(id:"bc5mnov2oau0r8ddf3rg") {
+    id
+    payName
+    payFee
+    payCode
+    payDesc
+    enabled
+    sortOrder
+    isCod
+    isOnline
+  }
+}
+
+# 删除支付方式
+mutation{
+  deletePayment(ID:"bc5mn7n2oau0r8ddf3r0")
+}
+
+# 更新支付方式
+mutation{
+  updatePayment(id:"bc5mnov2oau0r8ddf3rg",NewPay:{
+    payName:"支付宝"
+    payCode:"AliPay"
+    payFee:"未知"
+    payDesc:"阿里巴巴集团，快速、安全、稳定"
+    sortOrder:99
+  }) {
+    id
+  }
+}
+
+# 创建支付方式
+mutation{
+  createPayment(NewPay:{
+    payName:"支付宝"
+    payCode:"Alipay"
+    payFee:"未知"
+    payDesc:"阿里巴巴，快速、安全、稳定"
+  }) {
+    id
+  }
+}
+
+# 创建属性
+mutation{
+	createAttribute( 
+    newAttr:{
+	  name:"生产日期"
+      type:mutiselect
+      defaultValue:"2018"
+      options:["2016","2017","2018"]
+      code:"shengchanriqi"
+    }
+  ) {
+	  id
+    name
+    type
+    required
+    defaultValue
+    enabled
+    options
+    deleted
+    code
+	}
+}
+
+
+# 修改属性
+mutation{
+	updateAttribute(
+    ID:"bc5q7nv2oau295efrom0"
+    newAttr:{
+			name:"颜色"
+      type:textfield
+      defaultValue:"黄色"
+      options:["红","黄","绿"]
+      code:"yanse"
+    }
+  ) {
+	  id
+    name
+    type
+    required
+    defaultValue
+    enabled
+    options
+	}
+}
+
+
+# 删除属性
+mutation{
+  deleteAttribute(ID:"bc5q7nv2oau295efrom0") {
+  }
+}
+
+
+# 查找所有属性
+query{
+  attributes{
+    id
+    name
+    type
+    required
+    defaultValue
+    enabled
+    options
+    code
+  }
+}
+
+
+# 根据ID查找属性
+query{
+  attribute(id:"bc5q8mn2oau295efron0"){
+	  id
+    name
+    type
+    required
+    defaultValue
+    enabled
+    options
+    deleted
+  }
+}
+
+
+#根据ID集合查找属性集合
+query{
+  attributesByIds(ids:["bc5nq5n2oau295efrokg","bc5q8av2oau295efromg"]) {
+    id
+    name
+    options
+  }
+}
+
+
+# 创建属性集合
+mutation{
+  createAttributeSet(NewAttrSet:{
+    attribute_ids:["bc5nq5n2oau295efrokg","bc5q6qf2oau295efrolg"]
+    name:"常用属性集2"
+  }){
+    id
+    name
+    attributes{
+      id
+      name
+      type
+      code
+      defaultValue
+      options
+    }
+  }
+}
+
+
+# 更新属性集合
+mutation{
+  updateAttributeSet(ID:"bc5r1s72oau3n0htcj90",NewAttrSet:{
+    attribute_ids:["bc5nq5n2oau295efrokg","bc5q6qf2oau295efrolg"]
+    name:"常用属性集2"
+  }){
+    id
+    name
+    attributes{
+      id
+      name
+      type
+      code
+      defaultValue
+      options
+    }
+  }
+}
+
+
+#查找所有属性集
+query{
+  attributesets{
+    id
+    name
+    attributes {
+      id
+      name
+      options
+    }
+  }
+}
+
+
+#根据ID查找属性集
+query{
+  attributeset(id:"bc5r1s72oau3n0htcj90"){
+	  id
+    name
+    attributes {
+      id
+      name
+      options
+    }
+  }
+}
+
+
+#删除属性集
+mutation{
+  deleteAttributeSet(ID:"bc5r1s72oau3n0htcj90"){}
+}
+
+
+#查找所有品牌
+query{
+  brands{
+	id
+    name
+    description
+    thumbnail
+    deleted
+    enabled
+    sort_order
+    updated_at
+    created_at
+    brand_type
+    machine_types
+    second_price_ratio
+    retail_price_ratio
+  }
+}
+
+
+#根据ID查找品牌
+query{
+  brand(id:"0033"){
+	  id
+    name
+    description
+    thumbnail
+    deleted
+    enabled
+    sort_order
+    brand_type
+    machine_types
+    second_price_ratio
+    retail_price_ratio
+  }
+}
+
+
+# 删除品牌
+mutation{
+  deleteBrand(ID:"0033")
+}
+
+
+#更新品牌
+mutation{
+	updateBrand( 
+    id:"bc5sph72oau7v4ab2210"
+    newBrand:{
+      name:"日立"
+      thumbnail:"1.png"
+      description:"始于1910年日本,世界500强,全球著名的日本工业品牌的代表,日本较大的综合电机生产商,株式会社日立制作所"
+      brand_type:excavator
+      machine_types:["xxx","zzz","kkk"]
+    }
+  ) {
+	id
+    name
+    description
+    thumbnail
+    deleted
+    enabled
+    sort_order
+    brand_type
+    machine_types
+	}
+}
+
+
+#创建品牌
+mutation{
+	createBrand( 
+    newBrand:{
+      name:"部件品牌1"
+      thumbnail:"2.png"
+      description:"创建部件品牌测试"
+      brand_type:part
+      # machine_types:["xxx","yyy","ppp"]
+    }
+  ) {
+	id
+    name
+    description
+    thumbnail
+    deleted
+    enabled
+    sort_order
+    brand_type
+    machine_types
+	}
+}
+
+
+# 评论列表
+query{
+  comments(first:5,offset:1,sort:{orderBy:created_at,sort:desc}){
+    totalCount
+    pageInfo{
+      startCursor
+      endCursor
+      hasNextPage
+    }
+    edges{
+      cursor
+      node{
+        id
+        userIp
+        rank
+        content
+        createdAt
+        isShow
+        order {
+          id
+        }
+        user {
+          id
+        }
+      }
+    }
+  }
+}
+
+
+# 根据ID查找评论
+query{
+  comment(id:"0001"){
+    id
+    rank
+    order {
+      id
+    }
+    user {
+      id
+    }
+    content
+    createdAt
+    isShow
+  }
+}
+
+
+# 回复评论
+mutation{
+  commentReply(ID:"0001",content:"zzzzzzzzzzzzzz"){
+    id
+    content
+    reply
+    replyTime
+  }
+}
+
+
+# 设置评论是否可见
+mutation{
+  commentIsShow(commentID:"0002")
+}
+
+
+# 通过商品ID查找评论
+query{
+  findCommentsByProductID(productID:"0022"){
+    id
+    content
+    reply
+  }
+}
+
+
+# 查询分类列表
+query{
+  categories {
+		... children
+  }
+}
+fragment children on Category {
+	id
+  name
+  sortOrder
+  parentId
+  thumbnail
+  childrent {
+    id
+    name
+    sortOrder
+    thumbnail
+  	parentId
+    childrent{
+      id
+      name
+      sortOrder
+      thumbnail
+  		parentId
+    }
+  }
+}
+
+
+# 创建分类
+mutation{
+	createCategory( 
+    newCat:{
+			name:"yyyyy"
+      parentId:"0012"
+      thumbnail:"www.baidu.com"
+    }
+  ) {
+		id
+    name
+    thumbnail
+    parentId
+    sortOrder
+    childrent {
+      id
+      name
+    }
+	}
+}
+
+
+
+# 更新分类
+mutation{
+  updateCategory(
+    ID:"bc6coaf2oau49jkiq6u0"
+  	newCat:{
+      name:"ttttttttt"
+      parentId:"bbtbt7v2oau59av2thlg"
+      thumbnail:"www.baidu.com/1.jpg"
+    }
+  ) {
+		id
+    name
+    thumbnail
+    parentId
+    sortOrder
+    childrent {
+      id
+      name
+    }
+  }
+}
+
+
+# 删除分类
+mutation{
+  deleteCategory(ID:"bc6coaf2oau49jkiq6u0")
+}
+
+
+
+# 通过ID查找分类
+query{
+  category(id:"0011"){
+    id
+    name
+    childrent {
+      id
+    }
+  }
+}
+
+
+# 获取地区信息
+query{
+  regions(pid:0){
+    id
+    name
+    parent_id
+    sort_order
+  }
+}
+
+
+
+# 创建收货地址
+mutation{
+  createAddress(
+    newAddr:{
+      mobile:"13540069749"
+      consignee:"黄飞鸿"
+      address:{
+        areaId:230208
+        address:"关东一街555号"
+      }
+      zipcode:"62000"
+    }
+  ) {
+    id
+    consignee
+    isDefault
+    mobile
+    address {
+      areaId
+      regionName
+      address
+    }
+  }
+}
+
+
+#更新收货地址
+mutation{
+  updateAddress(
+    id:"bc6fk972oau61ub1h0qg"
+    newAddr:{
+      mobile:"13540069748"
+      consignee:"哈登"
+      address:{
+        areaId:230203
+        address:"丰田中心"
+      }
+      zipcode:"651248"
+    }
+  ) {
+    id
+    consignee
+    isDefault
+    mobile
+    address {
+      areaId
+      regionName
+      address
+    }
+  }
+}
+
+
+# 根据ID查找收货地址
+query{
+  myAddress(id:"bc6frqn2oau6regb8bl0") {
+    id
+    mobile
+    consignee
+    address{
+      regionName
+      areaId
+      address
+    }
+    zipcode
+    isDefault
+  }
+}
+
+
+# 查找所有收货地址
+query{
+  myAllAddress{
+    id
+    mobile
+    consignee
+    address{
+      regionName
+      areaId
+      address
+    }
+    zipcode
+    isDefault
+  }
+}
+
+
+#删除收获地址
+mutation{
+  deleteAddress(id:"bc6frqn2oau6regb8bl0")
+}
+
+
+#设置默认收货地址
+mutation{
+  setDefaultAddress(id:"bc6frqn2oau6regb8bl0")
+}
+
+
+# 查询会话用户提款资料
+query{
+  takecashs {
+    UserID
+    Ischecked
+    DebitCardInfo{
+	  cardHolder
+      cardNumber
+      branch
+      province
+      city
+    }
+  }
+}
+
+
+# 修改提款资料,没有就添加一条，有就直接修改
+mutation {
+	updateTakeCash(debitcard:{
+    debitCardInfo:{
+    cardHolder:"刘和平"
+    cardNumber:"62284804639182"
+    bankName:"人民银行"
+    branch:"中和支行"
+    provinceId:12
+    cityId:88
+  }}){
+    DebitCardInfo{
+      branch
+      province
+      bankName
+      city
+      cardHolder
+      cardNumber
+    }
+  }
+}
+
+
+
+# 修改商家资料，没有就直接插入
+mutation {
+  updateProfile(
+		profile:{
+      repName:"李四"
+      companyName:"拼机惠科技有限公司"
+      socialId:"510922199816746478"
+      licenseImage:"1.jpg"
+      companyImage:"2.jpg"
+      companyAddress:{
+        areaId:130302
+        address:"环球中心"
+      }
+      deliveryAddress:{
+        areaId:152530
+        address:"社区服务中心"
+      }     
+    }
+  ) {
+    socialId
+    repName
+    companyName
+    licenseImage
+    companyImage
+    companyAddress {
+      areaId
+      regionName
+      address
+    }
+    deliveryAddress {
+      areaId
+      regionName
+      address
+    }
+  } 
+}
+
+
+# 获取商户资料
+query{
+  merchantprofiles{
+    socialId
+    repName
+    companyName
+    companyImage
+    licenseImage
+    companyAddress {
+      areaId
+      regionName
+      address
+    }
+    deliveryAddress {
+      areaId
+      regionName
+      address
+    }
+    shippingAddress{
+      id
+      mobile
+      consignee
+      address{
+        regionName
+        areaId
+        address
+      }
+      zipcode
+      isDefault
+    }
+    takeCash{
+      UserID
+      Ischecked
+      DebitCardInfo{
+      cardHolder
+        cardNumber
+        branch
+        province
+        city
+      }
+    }
+  }
+}
+
+
+# 根据条件获取用户列表
+query{
+  users(
+    first:20,
+    offset:0,
+    sort:{
+      sort:asc,
+      orderBy:created_at
+    },
+    search:{
+      status:normal
+      usertype:consumer
+      # mobile:"13540069748"
+    }) {
+    totalCount
+    pageInfo{
+      endCursor
+      startCursor
+      hasNextPage
+    }
+    edges {
+      node {
+        id
+        name
+        mobile
+        status
+        type
+        
+        userProfile{
+          
+          ... on MerchantProfile {
+            companyName
+            companyImage
+            companyAddress {
+              regionName
+            }
+            shippingAddress{
+              consignee
+              zipcode
+              id
+              address {
+                regionName
+              }
+            }
+          }
+          
+          ... on CustomerProfile{
+            shippingAddress{
+              consignee
+              zipcode
+              id
+              address {
+                regionName
+              }
+            }
+            wechartProfile{
+              openid
+              nickname
+              language
+              gender
+              avatarUrl
+              user {
+                id
+                name
+              }
+            }
+          }
+          
+        }
+        
+        
+      }
+    }
+  }
+}
+
+
+
+# 上传商品
+mutation{
+  createProduct(NewPro:{
+    # batchPrice:100
+    # stock:99
+    name:"上传测试商品1"
+    spec_1_name:"颜色"
+    spec_2_name:"尺寸"
+    attributeSetID:""
+    brandID:"kakjxnajj91unxlkSKASIQ"
+    categoryID:"0012"
+    shippingFee:5.5
+    relatedIds:""
+    content:""
+    machine_types:""
+    tags:""
+    attrs:"{}"
+    images:["a.png","b.png","c.png"]
+    spec:[{batchPrice:10,stock:9,spec1:"成都",spec2:"2kg"},{batchPrice:1000,stock:999,spec1:"武汉",spec2:"20kg"}]
+  }){
+    id
+    parentId
+  }
+}
+
+
+# 更新商品（如果为simple类型就直接修改基础信息，如果为configure就修改规格信息，添加了规格就添加商品）
+mutation{
+  updateProduct(ID:"bcdr7n2eisu2mu72hqlg",NewPro:{
+    name:"BBBBB"
+    attributeSetID:"bc5r1cv2oau3n0htcj8g"
+    batchPrice:10
+    stock:99
+    shippingFee:3.4
+    categoryID:"0011"
+    relatedIds:["0021"]
+    content:"bbb"
+    brandID:"kakjxnajj91unxlkSKASIQ"
+    tags:["测试","挖掘机","日立"]
+    machine_types:["HQ-1","HQ-2"]
+    attrs:"{\"chandi\": [\"成都\", \"武汉\"], \"chicun\": \"1.2M\"}"
+    images:["1.png","2.png","3.png"]
+    spec_1_name:"产地"
+    spec_2_name:"重量"
+    spec:[{product_id:"bcdr7naeisu2mu72hqng",batchPrice:99,stock:7,spec1:"成-都",spec2:"2kg"},{product_id:"bcdr7naeisu2mu72hqpg",batchPrice:999,stock:77,spec1:"绵-阳",spec2:"20kg"},{product_id:"bcdr9lqeisu2mu72hr6g",batchPrice:9999,stock:777,spec1:"北-京",spec2:"200kg"}]
+  }){
+    id
+    Children{
+      id
+    }
+  }
+}
+
+
+#通过ID查找商品
+query{
+  product(id:"bc7b3h72oau51tsfr20g") {
+    id
+    content
+    name
+    attributeSet {
+      id
+      name
+    }
+    attrs
+    category {
+      id
+      name
+      childrent {
+        id
+        name
+      }
+    }
+    machine_types
+    spec_1_name
+    spec_2_name
+    batchPrice
+    secondPrice
+    retailPrice
+  }
+}
+
+
+
+# 通过商品ID查找商品图片
+query{
+  ProductImages(id:"bc7b3h72oau51tsfr20g"){
+    id
+    productID
+    samllImage
+    mediumImage
+    bigImage
+  }
+}
+
+
+
+
+
+
+#搜索商品，展示商品列表
+query{
+  products(first:100,offset:0,sort:{
+    sort:desc
+    orderBy:created_at
+  },search:{
+    # category:"0013",
+    key:""
+  }){
+    totalCount
+    pageInfo {
+      startCursor
+      endCursor
+      hasNextPage
+    }
+    edges{
+      cursor
+      node {
+        id
+        price{
+          ... on AdminPrice{batchPrice,secondPrice,retailPrice}
+          ... on ProviderPrice{price}
+          ... on AllyPrice {price}
+        }
+        stock
+        machineTypes
+        specName1
+        specName2
+        spec1
+        spec2
+        parentId
+        type
+        shippingFee
+        content
+        name
+        isSale
+        deleted
+        attributeSet {
+          id
+          name
+        }
+        category{
+          id
+          name
+          childrent {
+            id
+          }
+        }
+        brand{
+          id
+          name
+        }
+        productImages{
+          id
+          bigImage
+          samllImage
+          mediumImage
+        }
+        attrs
+        relatedIds
+        tags
+        createdAt
+        updatedAt
+        comments {
+          id
+          content
+          reply
+          userIp
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+# 加盟商库存信息
+query{
+  stocks(search:{
+    productId:"0024"
+    merchantId:"bble9gmak7rhvef2lecg"
+  }){
+    productId
+    merchantId
+    stock
+  }
+}
+
+# 根据商品ID获取上传商家资料
+query{
+  FindMerchantsByProductID(productID:"bc7b3h72oau51tsfr20g"){
+    companyName
+    companyImage
+    companyAddress {
+      regionName
+    }
+    socialId
+    takeCash {
+      UserID
+      Ischecked
+    }
+    licenseImage
+  }
+}
+
+
+
+# 根据ID获取优惠券
+query{
+  coupon(id:"bbp4iguak7rhnps11ke0"){
+    id
+    description
+    value
+    createdAt
+    updatedAt
+    limitAmount
+    expiredAt
+    type
+    quantity
+    startAt
+  }
+}
+
+# 获取所有优惠券
+query{
+  coupons{
+    id
+    description
+    value
+    createdAt
+    updatedAt
+    limitAmount
+    expiredAt
+    type
+    quantity
+  }
+}
+
+
+# 删除优惠券
+mutation{
+  deleteCoupon(ID:"ceshi"){}
+}
+
+# 创建优惠券
+mutation{
+  createCoupon(
+		cou:{
+      description:"只是测试而已"
+      value:20
+      limitAmount:199
+      expiredAt:"2019-06-07T10:16:15Z"
+      quantity:2000
+      type:simple
+      startAt:"2019-06-07T10:16:15Z"
+    }
+  ){
+    id
+    description
+    value
+    createdAt
+    updatedAt
+    limitAmount
+    expiredAt
+    type
+    quantity
+    startAt
+  }
+}
+
+
+# 更新优惠券
+mutation{
+  updateCoupon(
+    ID:"bcf3itn2oau2u64hillg"
+		cou:{
+      description:"zzzzztttttzzzz"
+      value:200
+      limitAmount:998
+      expiredAt:"2019-06-07T10:16:15Z"
+      quantity:100
+      type:simple
+      startAt:"2019-06-07T10:16:15Z"
+    }
+  ){
+    id
+    description
+    value
+    createdAt
+    updatedAt
+    limitAmount
+    expiredAt
+    type
+    quantity
+    startAt
+  }
+}
+
+
+
+#通过ID查找订单
+query{
+  order(id:"bcd701mak7rh6gcd5qag"){
+    id
+    user {
+      id
+      name
+      mobile
+    }
+    status
+    usedCoupon
+    childrenOrders {
+      id
+      address{consignee,mobile,zipcode,address,regionName,areaID}
+    }
+    address{consignee,mobile,zipcode,address,regionName,areaID}
+    merchant {
+      socialId
+      repName
+      companyName
+      licenseImage
+      companyImage
+      lat
+      lng
+    }
+    products {
+      id
+      name
+      price
+      image
+      productCount
+      order {
+        id
+      }
+      product{
+        name
+        productImages{bigImage mediumImage samllImage}
+        price{...on AdminPrice{} ... on AllyPrice{} ...on AdminPrice{}}
+      }
+    }
+    shippingId
+    shippingName
+    payCode
+    payName
+    amount
+    shippingFee
+    moneyPaid
+    orderAmount
+    createdAt
+    confirmTime
+    payTime
+    shippingTime
+    note
+    postscript		
+  }
+}
+
+
+# 设置订单状态
+mutation{
+  setOrderStatus(id:"bcd701mak7rh6gcd5qa0",status:unpaid){}
+}
+
+
+# 根据条件获取订单列表
+query{
+  orders(first:100,offset:0,sort:{sort:asc,orderBy:amount},search:{shipping_id:"bc8g7vmak7rj1affcvp0"}){
+    totalCount
+    pageInfo {
+      startCursor
+      endCursor
+      hasNextPage
+    }
+    edges {
+			cursor
+      node{
+          id
+          user {
+            id
+            name
+            mobile
+          }
+          status
+          usedCoupon
+          childrenOrders {
+            id
+            address{consignee,mobile,zipcode,address,regionName,areaID}
+          }
+          address{consignee,mobile,zipcode,address,regionName,areaID}
+          merchant {
+            socialId
+            repName
+            companyName
+            licenseImage
+            companyImage
+            lat
+            lng
+          }
+          products {
+            id
+            name
+            price
+            image
+            productCount
+            order {
+              id
+            }
+            product{
+              name
+              productImages{bigImage mediumImage samllImage}
+              price{...on AdminPrice{} ... on AllyPrice{} ...on AdminPrice{}}
+            }
+          }
+          shippingId
+          shippingName
+          payCode
+          payName
+          amount
+          shippingFee
+          moneyPaid
+          orderAmount
+          createdAt
+          confirmTime
+          payTime
+          shippingTime
+          note
+          postscript
+      }
+    }
+
+  }
+}
+
+
+#申请提现
+mutation{
+  applyCash(info:{
+    amount:5000
+    note:"急需资金周转，请尽快完成"
+    debitCardInfo:{
+      cityId:10
+      provinceId:2
+      cardHolder:"刘六"
+      cardNumber:"6228480415975"
+      branch:"华阳支行"
+      bankName:"华夏银行"
+    }
+  }){
+    id
+    merchantID
+  }
+}
+
+
+#获取所有提现申请
+query{
+  cashRequests{
+    id
+    merchantID
+  }
+}
+
+
+# 根据ID获取提现申请
+query{
+  cashRequest(id:"bcf47hf2oau597ei4490"){
+    id
+    merchantID
+    amount
+  }
+}
+
+# 商家确认提现完成
+mutation{
+  finishedCash(id:"bcfade2eisu2i659riq0"){}
+}
+
+
+#管理员拒绝提现
+mutation{
+  refusedCash(id:"bcfade2eisu2i659riq0",reply:"就是看你不爽"){}
+}
+
+
+#管理员设置提现状态为已打款
+mutation{
+  paidCash(id:"bcfade2eisu2i659riq0",reply:"就是看你不爽"){}
+}
+
+
+#通过ID查找秒杀
+query{
+  spike(id:"bcg7ebv2oau2fhprbgvg"){
+    id
+    startAt
+    expiredAt
+    totalCount
+    price
+    buyLimit
+    product {
+      id
+    }
+    merchant {
+      socialId
+      repName
+      companyName
+      licenseImage
+      companyImage
+      lat
+      lng
+    }
+  }
+}
+
+
+#查找所有秒杀
+query{
+  spikes{
+    id
+    startAt
+    expiredAt
+    totalCount
+    price
+    buyLimit
+    product {
+      id
+    }
+    merchant {
+      socialId
+      repName
+      companyName
+      licenseImage
+      companyImage
+      lat
+      lng
+    }
+  }
+}
+
+#添加秒杀
+mutation{
+  createSpike(spike:{
+    productID:"0021"
+    price:11.11
+    startAt:"2018-05-06"
+    expiredAt:"2018-06-13"
+    totalCount:999
+    buyLimit:10
+  }){
+    id
+    totalCount
+  }
+}
+
+#更新秒杀
+mutation{
+  UpdateSpike(ID:"bcftehf2oau5nqm187f0",spike:{
+    productID:"0021"
+    price:12.8
+    startAt:"2018-06-06"
+    expiredAt:"2018-06-13"
+    totalCount:888
+    buyLimit:5
+  }){
+    id
+    totalCount
+  }
+}
+
+# 查找添加广告时的广告位置可选项
+query{
+  findAdPosition
+}
+
+
+# 添加广告
+mutation{
+  createAd(ad:{image:"111.png",link:"www.pinjihui.com",sort:251,position:"index_banner"}){
+    id
+    position
+    sort
+    isshow
+    link
+    image
+    merchant{
+      userId
+      socialId
+    }
+  }
+}
+
+# 更新广告
+mutation{
+  updateAd(id:"bcpkib72oau0ps0e5bf0",ad:{image:"3.png",link:"www.pinjihui.com/test",sort:50,position:"index_banner"}){
+    id
+    position
+    sort
+    isshow
+    link
+    image
+    merchant{repName}
+  }
+}
+
+# 获取所有广告
+query{
+  ads{
+    id
+    position
+    sort
+    isshow
+    link
+    image
+    merchant{repName,waiters}
+  }
+}
+
+# 根据ID查找广告
+query{
+  ad(id:"bcpl9ov2oau34j4g8o8g"){
+    id
+    position
+    sort
+    isshow
+    link
+    image
+    merchant{
+      companyName
+    }
+  }
+}
+
+# 删除广告
+mutation{
+  deleteAd(ID:"bcpl9ov2oau34j4g8o8g"){}
+}
+
+# 设置广告是否显示
+mutation{
+  setAdIsShow(ID:"bcpkuk72oau26j401vvg"){}
+}
+
+
+# 创建系列号
+mutation{
+  createBrandSeries(series:{brand_id:"bd086v5m54khn3h169ag",series:"2系列",image:"2.jpg",machine_types:["MMM","NNN"]}){
+    id
+    brand_id
+  }
+}
+
+# 更新系列号
+mutation{
+  updateBrandSeries(id:"bd09bgv2oau1b3cjnuf0",series:{brand_id:"bd086v5m54khn3h169ag",series:"2系列",image:"2.jpg",machine_types:["MMM","NNN"]}){
+    id
+    brand_id
+    image
+    series
+    machine_types
+  }
+}
+
+# 删除系列号
+mutation{
+  deleteBrandSeries(ID:"bd09oqf2oau367gcpj1g"){}
+}
+
+# 查询品牌信息
+query{
+  brand(id:"bd086v5m54khn3h169ag"){
+    id
+    name
+    machine_types{
+      id
+      machine_types
+    }
+  }
+}
+
+
+# 创建品牌
+mutation{
+  createBrand(
+    newBrand:{
+      name:"test"
+      thumbnail:"jpg.jpg"
+      description:"test test"
+      brand_type:excavator
+      sort_order:999
+    }
+  ){
+    id
+  }
+}
+
+
+# 更新品牌
+mutation{
+  updateBrand(
+    id:"bd0ba6f2oau6s59nrdbg"
+    newBrand:{
+      name:"测试"
+      thumbnail:"zbc.jpg"
+      description:"测试哦而已"
+      brand_type:excavator
+      sort_order:888
+    }
+  ){
+    id
+  }
+}
+
+
+# 删除第三方客服后进行标记
+mutation{
+  saydeleteFromZhiMa(ID:"bd4321f2oau3vonq5gr0"){}
+}
+
+
+# 审核客服
+mutation{
+  checkWaiter(ID:"bd4321f2oau3vonq5gr0",waiter_id:"133",remark:"yyy"){}
+}
+
+# 删除客服
+mutation{
+  deleteWaiter(ID:"bd43kqn2oau4qmp913c0"){}
+}
+
+# 获取当前用户的客服
+query{
+  findWaitersByMerchantID{
+        id
+        checked
+        deleted     
+        name
+        mobile
+        Merchant{repName}
+  }
+}
+
+
+# 根据条件查找客服
+query{
+  waiters(
+    first:100
+    offset:0
+    search:{checked:false,mobile:"12345678914"}
+    sort:{sort:asc,orderBy:waiter_id}
+  ){
+		totalCount
+    pageInfo {
+      startCursor
+      endCursor
+    }
+    edges{
+      cursor
+      node{
+        id
+        checked
+        deleted
+        name
+        mobile
+        Merchant{repName}
+      }
+    }
+  }
+}
+
+
+
+# 添加客服
+mutation{
+  createWaiter(NewWa:{
+    name:"ceshi"
+    mobile:"12345678911"
+  }) {
+    id
+  }
+}
+
+# 更新客服
+mutation{
+  updateWaiter(id:"bd43kqn2oau4qmp913c0",NewWa:{
+    name:"ceshi"
+    mobile:"12345678914"
+  }) {
+    id
+  }
+}
+
+# 通过ID查找客服
+query{
+  waiter(id:"bd43kqn2oau4qmp913c0"){
+    id
+    checked
+    deleted
+    name
+    mobile
+    Merchant{repName}
+  }
+}
+
+
+# 查看统计信息
+query{
+  GetStatistic{
+    total
+    cost
+    discount
+    bonus
+    profit
+    bestSaleProduct{id,sales_volume}
+    favoriteProduct{id,favorites}
+}
+}

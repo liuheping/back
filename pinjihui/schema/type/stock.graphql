@@ -1,0 +1,8 @@
+# 产品库存结构
+type Stock {
+    productId: ID!
+    # 所属商家 ID
+    merchantId: ID!
+    # 库存数量
+    stock: Int!
+}

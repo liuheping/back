@@ -1,0 +1,38 @@
+# 商家信息
+type Merchant {
+    id: ID!
+    # 公司/门店名称
+    companyName: String!
+    # 公司/门店地址
+    companyAddress: String!
+    # 发货地址
+    deliveryAddress: String!
+    # 店铺形象照
+    companyImage: [String!]!
+    # 是否是平台
+    isPlatform: Boolean!
+    logo: String
+    telephone: String
+    # 店铺和 @position 之间的距离
+    distance(position: Location): String!
+    # 月销量
+    salesVolume: Int!
+    # 收藏数
+    collectedQuantity: Int!
+    # 评论数
+    commentQuantity: Int!
+    # 用户店铺关系
+    userEdge: UserFavoriteEdge!
+    # 经纬度
+    lat: Float
+    lng: Float
+    # 客服人员ID
+    waiters: [String!]!
+}
+
+type UserFavoriteEdge {
+    # 是否收藏
+    isCollected: Boolean!
+    # 收藏 id
+    favoriteID: ID
+}

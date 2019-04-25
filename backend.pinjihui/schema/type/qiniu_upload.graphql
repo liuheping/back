@@ -1,0 +1,21 @@
+# 七牛上传凭证
+type QiniuUploadToken {
+    # token
+    token: String!
+    # 上传路径 需要回传给业务服务器
+    # key: String!
+}
+
+enum Module {
+    product
+    brand
+    category
+    merchantprofile
+    ad
+    shippingInfo
+}
+
+enum FileExt {
+    jpg
+    png
+}

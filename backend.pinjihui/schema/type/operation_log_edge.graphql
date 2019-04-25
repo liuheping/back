@@ -1,0 +1,4 @@
+type OperationLogEdge {
+    cursor: ID!
+    node: OperationLog
+}

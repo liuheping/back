@@ -1,0 +1,115 @@
+app-name = "backend.pinjihui"
+version = 1.0
+listen-port = ":3001"
+
+# 远程测试环境数据库
+[db]
+host = "39.108.97.201"
+port = "5432"
+user = "postgres"
+password = "pinjihui!@#123"
+dbname = "pinjihui"
+
+# 本地数据库
+# [db]
+# host = "localhost"
+# port = "5432"
+# user = "postgres"
+# password = "123456"
+# dbname = "postgres"
+
+# 远程数据库
+# [db]
+# host = "localhost"
+# port = "5433"
+# user = "postgres"
+# password = "123456"
+# dbname = "pinjihui"
+
+[log]
+debug-mode = true
+log-format = "%{color}%{time:2006/01/02 15:04:05 -07:00 MST} [%{level:.6s}] %{shortfile} : %{color:reset}%{message}"
+
+[auth]
+#jwt sign secret
+jwt-secret = "0123456789abcdefghijklmn0123456789abcdefghijklmn"
+#jwt expired time in second
+jwt-expire-in = "40000s"
+
+
+[wechart]
+appid = "wx911cef0954b4612e"
+secret = "0b455b2997e2b8f5ce6d0ce050ee5280"
+mchId = "1505508031"
+
+[qiniu]
+bucket = "pinjihui-test"
+AccessKey = "d5tED2TwJGtf3gDprAVaau65giIhZGrBqOWW3OV6"
+SecretKey = "LmnpMQ1Mg5G0Sdpjc3ZcKxOu_VbJccg3lBnaWV9u"
+cndHost = "http://p9fl9iftt.bkt.clouddn.com"
+
+[ad]
+admin_position_options = "'{\"index_banner\":\"首页banner图\",\"index_spike\":\"首页秒杀\",\"index_brand_banner\":\"首页品牌轮播图\"}'" 
+merchant_position_options = "'{\"store_index\":\"店铺首页\"}'"
+
+[queryfiled]
+CreateShippingInfo = "创建物流信息"
+UpdateShippingInfo = "更新物流信息"
+DeleteShippingInfo = "删除物流信息"
+setProductIsSale = "设置商品上下架"
+saydeleteFromZhiMa = "标记是否删除了芝麻小客服帐号"
+checkWaiter = "审核客服"
+deleteWaiter = "删除客服"
+updateWaiter = "更新客服"
+createWaiter = "添加客服"
+deleteBrandSeries = "删除系列号"
+updateBrandSeries = "更新系列号"
+createBrandSeries = "创建系列号"
+setAdIsShow = "设置广告是否显示"
+deleteAd = "删除广告"
+updateAd = "更新广告"
+createAd = "创建广告"
+checkMerchant = "审核商家（资料）"
+setReatilPriceByAlly = "设置售价"
+createSpike = "添加秒杀"
+updateSpike = "更新秒杀"
+finishedCash = "确认提现"
+paidCash = "确认已打款"
+refusedCash = "拒绝提现"
+applyCash = "提现申请"
+setOrderStatus = "设置订单状态——>发货"
+deleteCoupon = "删除优惠券"
+createCoupon = "创建优惠券"
+updateCoupon = "更新优惠券"
+setDefaultAddress = "设置默认收货地址"
+deleteAddress = "删除收货地址"
+deleteConfig = "删除配置"
+createConfig = "创建配置"
+updateConfig = "更新配置信息"
+deletePayment = "删除支付方式"
+createPayment = "创建支付方式"
+updatePayment = "更新支付方式"
+updateProduct = "更新商品"
+createProduct = "创建商品"
+deleteProduct = "删除商品"
+commentReply = "回复评论"
+commentIsShow = "设置评论是否可见"
+deleteAttributeSet = "删除属性集合"
+updateAttributeSet = "更新属性集合"
+createAttributeSet = "创建属性集合"
+deleteAttribute = "删除属性"
+updateAttribute = "更新属性"
+createAttribute = "创建属性"
+createCategory = "创建分类"
+updateCategory = "更新分类"
+deleteCategory = "删除分类"
+deleteBrand = "删除品牌"
+createBrand = "创建品牌"
+updateBrand = "更新品牌"
+createAddress = "创建收货地址"
+updateAddress = "更新收货地址"
+register = "注册"
+retrievePassword = "找回密码"
+changePassword = "修改密码"
+updateProfile = "更新资料"
+updateTakeCash = "修改提款资料,没有就添加一条，有就直接修改"

@@ -1,0 +1,8 @@
+type Checkout {
+    # 分组后的购物车项
+    Groups: [CartItemGroup!]!
+    # 商品总价
+    productAmount: String!
+    # 代金券
+    coupons: [Coupon!]!
+}

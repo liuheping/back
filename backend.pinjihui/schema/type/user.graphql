@@ -1,0 +1,58 @@
+type User {
+    id: ID!
+    name: String
+    mobile: String
+    email: String
+    createdAt: Time
+    updatedAt: Time
+    # 最近登陆时间
+    lastLoginTime: Time
+    # 最近登陆IP
+    lastIp: String
+    # 类型
+    type: userType
+    # 状态
+    status: String!
+    # 用户资料（商家就现实商家资料，消费者就显示微信资料）
+    userProfile: UserProfile
+    lastOrders: [Order]
+    tokenString: String
+}
+
+union UserProfile = MerchantProfile | CustomerProfile
+
+enum userType {
+    admin
+    consumer
+    provider
+    ally
+    agent
+}
+
+enum userStatus {
+    normal
+    banned
+    unchecked
+    checked
+}
+
+# 排序依据枚举
+enum UserOrderBy {
+    created_at
+    last_login_time
+}
+
+# 排序参数结构
+input UserSortInput {
+    orderBy: UserOrderBy!
+    sort: SortType
+}
+
+# 搜索数据结构
+input UserSearchInput {
+    name: String
+    mobile: String
+    email: String
+    usertype: userType
+    status: userStatus
+}

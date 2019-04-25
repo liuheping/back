@@ -1,0 +1,13 @@
+# 购物车商品数据结构
+type CartItem {
+    id: ID!
+    product: Product!
+    # 商品数量
+    productCount: Int!
+    # 所属商家
+    merchant: Merchant!
+    # 商品价格小计
+    totalPrice: String!
+    # 从那个代理商加入购物车
+#    agent: Merchant!
+}

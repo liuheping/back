@@ -1,0 +1,15 @@
+# 收藏数据结构
+type Favorite {
+    id: ID!
+    # 收藏的对象, union 类型, 为产品或商家之一
+    object: FavoriteObject!
+}
+
+union FavoriteObject = Product | Merchant
+
+# 收藏连接模型结构
+type FavoritesConnection {
+    totalCount: Int!
+    favorites: [Favorite!]
+    pageInfo: PageInfo!
+}

@@ -1,0 +1,33 @@
+type CashRequest {
+    id: ID!
+    # 提现商家ID
+    merchant: MerchantProfile!
+    # 提现金额
+    amount: Float!
+    # 银行卡信息
+    debitCardInfo: DebitCardInfo!
+    # 状态
+    status: String!
+    # 管理员回复
+    reply: String
+    # 申请人备注
+    note: String
+    createdAt: Time!
+    updatedAt: Time!
+}
+
+enum CashRequestStatus {
+    unchecked
+    checking
+    checked
+    paid
+    finished
+    refused
+    closed
+}
+
+input CashRequestInput {
+    amount: Float!
+    note: String
+    debitCardInfo:DebitCardInput!
+}

@@ -1,0 +1,45 @@
+type Waiter {
+    id: ID!
+    # 商家ID
+    Merchant: MerchantProfile
+    # 客服电话
+    mobile: String!
+    # 客服姓名
+    name: String
+    # 第三方客服ID
+    waiter_id: String
+    # 是否审核
+    checked: Boolean!
+    # 是否删除
+    deleted: Boolean!
+    # 备注
+    remark: String
+}
+
+input WaiterInput {
+    # merchant_id: String!
+    mobile: String!
+    name: String
+}
+
+# 排序依据枚举
+enum WaiterOrderBy {
+    waiter_id
+}
+
+# 客服排序参数结构
+input WaiterSortInput {
+    orderBy: WaiterOrderBy!
+    sort: SortType
+}
+
+# 客服搜索数据结构
+input WaiterSearchInput {
+    key: String
+    merchant_id: ID
+    mobile: String
+    name: String
+    waiter_id: ID
+    checked: Boolean
+    deleted: Boolean
+}

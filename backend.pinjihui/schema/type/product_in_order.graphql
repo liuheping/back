@@ -1,0 +1,24 @@
+type ProductInOrder {
+    id: ID!
+    order: Order!
+    product: Product!
+    # 商品名称
+    name: String!
+    # 商品数量
+    productCount: Int!
+    # 下单时的售价
+    price: Float!
+    # 缩略图
+    image: String!
+    # 规格名称1
+    specName1: String
+    # 规格名称2
+    specName2: String
+    # 规格值1
+    spec1: String
+    # 规格值2
+    spec2: String
+    # 邮费
+    shippingFee: Float
+}
+

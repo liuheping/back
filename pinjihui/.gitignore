@@ -1,0 +1,12 @@
+# IDE
+.idea/
+/schema/bindata.go
+/vendor
+
+debug
+
+*.exe
+bindata.go
+
+gin-bin
+server

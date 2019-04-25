@@ -1,0 +1,4 @@
+type AttributesEdge {
+    cursor: ID!
+    node: Attribute
+}

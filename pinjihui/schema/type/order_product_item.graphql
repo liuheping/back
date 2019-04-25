@@ -1,0 +1,26 @@
+# 订单中的商品数据结构
+type OrderProductItem {
+    id: ID!
+    productID: ID!
+    # 商品名称
+    name: String!
+    # 商品数量
+    productCount: Int!
+    # 下单时的售价
+    price: String!
+    # 缩略图
+    image: String!
+    productSpec: [Attribute!]!
+    # 是否已评价
+    isCommented: Boolean!
+    # 评价 ID
+    commentID: ID
+    # 是否包含运费
+    containedShippingFee: Boolean!
+}
+
+type OrderProductItemConnnection {
+    totalCount: Int!
+    products: [OrderProductItem]
+    pageInfo: PageInfo!
+}

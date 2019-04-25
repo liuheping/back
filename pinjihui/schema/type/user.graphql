@@ -1,0 +1,33 @@
+# 用户数据结构
+type User {
+    id: ID!
+    name: String
+    mobile: String
+    email: String
+    createdAt: Time!
+    lastLoginTime: Time
+    lastIp: String
+    # ✔地址列表
+    addresses: [ShippingAddress!]
+    # ✔购物车
+    cart: [CartItem!]!
+    token: String
+    invited: Boolean!
+    inviteCode: String!
+    isFirstLogin: Boolean!
+    type: UserType!
+    # 是否已领取分享优惠券
+    hasShareCoupon: Boolean!
+    # 是否已领取被分享优惠券
+    hasBeShareCoupon: Boolean!
+}
+
+enum UserType {
+    consumer
+    # 供应商
+    provider
+    # 加盟商
+    ally
+    # 代理商
+    agent
+}

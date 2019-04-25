@@ -1,0 +1,115 @@
+type Order {
+    id: ID!
+    # 订单用户
+    user: User!
+    # 子订单
+    childrenOrders: [Order!]
+    # 订单收货地址
+    address: OrderAddress!
+    # 订单商家
+    merchant: MerchantProfile
+    # 订单商品
+    products: [ProductInOrder!]
+    # 配送方式ID
+    shippingId: ID
+    # 配送方式
+    shippingName: String
+    # 支付方式ID
+    payCode: ID!
+    # 支付方式
+    payName: String!
+    # howOos: HowOos
+    # 订单总金额
+    amount: Float!
+    # 邮费
+    shippingFee: Float
+    # 已支付金额
+    moneyPaid: Float!
+    # 应付款金额
+    orderAmount: Float!
+    # 创建时间
+    createdAt: Time!
+    # 确认时间
+    confirmTime: Time
+    # 支付时间
+    payTime: Time
+    # 发货时间
+    shippingTime: Time
+    # 商家备注
+    note: String
+    # 订单留言
+    postscript: String
+    # 订单状态
+    status: String!
+    # 优惠券ID
+    usedCoupon: String
+    # 优惠金额
+    OfferAmount: Float!
+    # 盈亏
+    income: Income
+    # 物流信息
+    shipping_info: ShippingInfo
+}
+
+union Income = ProviderIncome | AdminIncome | AllyIncome
+
+type ProviderIncome {
+    income: Float
+}
+
+type AllyIncome {
+    income: Float
+}
+
+type AdminIncome {
+    providerIncome: Float
+    allyIncome: Float
+}
+
+enum OrderStatus {
+    unpaid
+    paid
+    shipped
+    finish
+    cancelled
+    invalid
+    returned
+}
+
+enum OrderStatusUpdate {
+    shipped
+}
+
+# 订单排序依据枚举
+enum OrderOrderBy {
+    amount
+    order_amount
+    created_at
+    confirm_time
+    shipping_time
+    shipping_fee
+    pay_time
+    money_paid
+}
+
+# 订单排序参数结构
+input OrderSortInput {
+    orderBy: OrderOrderBy!
+    sort: SortType
+}
+
+# 订单搜索数据结构
+input OrderSearchInput {
+    user_id: ID
+    shipping_id: ID
+    merchant_id: ID
+    pay_code: String
+    status: OrderStatus
+    time: OrderTimeInput
+}
+
+# 订单搜索起止时间
+input OrderTimeInput{
+    start: Time!
+    end: Time!
+}

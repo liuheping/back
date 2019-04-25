@@ -1,0 +1,7 @@
+# 订单连接模型
+type OrdersConnection {
+    totalCount: Int!
+#    edges: [OrdersEdge]
+    orders: [Order!]
+    pageInfo: PageInfo!
+}

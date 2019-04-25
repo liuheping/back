@@ -1,0 +1,11 @@
+type TakeCash {
+    UserID: ID
+    # 是否审核
+    Ischecked: Boolean
+    # 银行卡信息
+    DebitCardInfo: DebitCardInfo
+}
+
+input TakeCashInput{
+    debitCardInfo:DebitCardInput!
+}

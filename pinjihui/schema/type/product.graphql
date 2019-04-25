@@ -1,0 +1,75 @@
+type Product {
+    id: ID!
+    name: String!
+    price: Float!
+    # 相关商品列表
+    relatedProducts: [Product!]!
+    # 详细描述, 富文本
+    content: String
+    # 部件所属品牌
+    brand: Brand
+    # tag 列表
+    tags: [String!]!
+    # 产品图片
+    productImages: [ProductImage!]
+    # 所有的自定义属性
+    attrs: [Attribute!]
+    # 同类商品所有规格
+    spec: ProductSpec
+    # closest Merchant
+    closestMerchant(position: Location): EdegProductMerchant
+    # 供货商距离
+    distance(position: Location): String!
+    # 商品所属店铺
+    relMerchant: Merchant!
+    # 该商品的规格
+    selfSpec: [Attribute!]!
+    # 库存
+    stock: Int!
+    # 是否包含运费
+    containedShippingFee: Boolean!
+    # 原价
+    originalPrice: String!
+    # 用户产品关系
+    userEdge: UserEdge!
+    # 好评率
+    bestCommentRate: String!
+    # 产品销量
+    salesVolume: Int!
+    # 零售价
+    retailPrice: Float!
+    # 商品秒杀信息
+    spike: Spike
+    # 浏览量
+    viewVolume: Int!
+}
+
+# 秒杀分页结构
+type SpikeConnection {
+    totalCount: Int!
+    spikes: [Spike!]
+    pageInfo: PageInfo!
+}
+
+# 秒杀结构
+type Spike {
+    id: ID!
+    product: Product!
+    # 秒杀价
+    price: Float!
+    startAt: Time!
+    expiredAt: Time!
+    # 是否售磬
+    isEmpty: Boolean!
+    # 剩余数量
+    count: Int!
+}
+
+type UserEdge {
+    # 是否收藏
+    isCollected: Boolean!
+    # 收藏 id
+    favoriteID: ID
+    # 代理商是否上架
+    isPurchased: Boolean!
+}

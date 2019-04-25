@@ -1,0 +1,30 @@
+# type ProductSpec {
+#     id: ID!
+#     productID: ID!
+#     spec1: String!
+#     spec2: String
+#     batchPrice: Float!
+#     secondPrice: Float!
+#     retailPrice: Float!
+#     stock: Int!
+#     sku: String!
+# }
+
+# 创建商品规格输入
+input SpecInput {
+    spec1: String!
+    spec2: String
+    batchPrice: Float!
+    stock: Int!
+    images: [String!]
+}
+
+# 更新商品规格输入
+input SpecUpdateInput {
+    product_id: String
+    spec1: String!
+    spec2: String
+    batchPrice: Float!
+    stock: Int!
+    images: [String!]
+}

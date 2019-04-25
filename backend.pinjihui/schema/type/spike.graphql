@@ -1,0 +1,25 @@
+type Spike {
+    id: ID!
+    # 秒杀价格
+    price: Float!
+    # 开始时间
+    startAt: Time!
+    # 结束时间
+    expiredAt: Time!
+    # 秒杀总数
+    totalCount: Int!
+    # 限购数量
+    buyLimit: Int!
+    merchant: MerchantProfile!
+    product: Product!
+}
+
+# 创建秒杀输入
+input SpikeInput {
+    productID: ID!
+    price: Float!
+    startAt: Time!
+    expiredAt: Time!
+    totalCount: Int!
+    buyLimit: Int!
+}

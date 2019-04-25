@@ -1,0 +1,13 @@
+# 分类数据结构
+type Category {
+    id: ID!
+    # 分类名称
+    name: String!
+    # 父ID
+    parentId: ID
+    # 缩略图/标志
+    thumbnail: String
+    # 子分类列表
+    children: [Category!]!
+    isCommon: Boolean!
+}

@@ -1,0 +1,7 @@
+type WechartPayParams {
+    timeStamp: String!
+    nonceStr: String!
+    package: String!
+    signType: String!
+    paySign: String!
+}

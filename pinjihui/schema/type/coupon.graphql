@@ -1,0 +1,31 @@
+type Coupon {
+    id: ID!
+    # 优惠券说明
+    description: String!
+    # 优惠券金额
+    value: Float!
+    # 起始时间
+    startAt: String!
+    # 过期时间
+    expiredAt: String!
+    # 订单金额最低要求
+    limitAmount: Float
+}
+
+# 评论连接模型结构
+type CouponsConnection {
+    totalCount: Int!
+    coupons: [Coupon!]
+    pageInfo: PageInfo!
+}
+
+enum CouponStatus {
+    # 可用
+    available
+    # 已使用
+    used
+    # 过期
+    expired
+    # 未使用
+    not_used
+}

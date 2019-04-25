@@ -1,0 +1,7 @@
+# 广告结构
+type AD{
+    # 图片地址
+    image: String!
+    # 链接地址
+    link: String
+}

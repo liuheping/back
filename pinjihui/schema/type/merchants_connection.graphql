@@ -1,0 +1,5 @@
+type MerchantsConnection {
+    totalCount: Int!
+    merchants: [Merchant!]!
+    pageInfo: PageInfo!
+}

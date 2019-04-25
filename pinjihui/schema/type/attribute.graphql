@@ -1,0 +1,6 @@
+type Attribute {
+    # 属性名
+    name: String!
+    # 属性值
+    value: String
+}

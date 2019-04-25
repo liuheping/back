@@ -1,0 +1,37 @@
+type Attribute {
+    id: ID!
+    name: String!
+    type: AttributeType!
+    required: Boolean!
+    enabled: Boolean!
+    searchable: Boolean!
+    deleted:Boolean!
+    # 默认值
+    defaultValue: String
+    # 选项
+    options: [String!]
+    # 代码，全局唯一
+    code: String!
+}
+
+enum AttributeType {
+    textfield
+    textarea
+    dropdown
+    mutiselect
+    time
+}
+
+# 创建属性输入
+input AttributeInput {
+    # 名称
+    name: String!
+    # 类型
+    type: AttributeType!
+    # 默认值
+    defaultValue: String
+    # 选项
+    options: [String!]
+    # 代码
+    code: String!
+}

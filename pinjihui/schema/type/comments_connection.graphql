@@ -1,0 +1,6 @@
+# 评论连接模型结构
+type CommentsConnection {
+    totalCount: Int!
+    comments: [Comment!]
+    pageInfo: PageInfo!
+}

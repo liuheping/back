@@ -1,0 +1,49 @@
+type Brand {
+    id: ID!
+    # 名称
+    name: String!
+    # 缩略图
+    thumbnail: String!
+    # 描述
+    description: String
+    deleted: Boolean!
+    enabled: Boolean!
+    sort_order: Int
+    # 品牌类型
+    brand_type: String!
+    created_at: Time
+    updated_at: Time
+    # 挖掘机型号
+    machine_types:[String!]
+    # 系列号
+    series: [BrandSeries]
+    # 上传商品时二手价格在批发价上的上浮比率（介于0到1之间）
+    second_price_ratio: Float!
+    # 上传商品时售价在批发价上的上浮比率 （介于0到1之间）
+    retail_price_ratio: Float!
+}
+
+# 创建品牌输入
+input BrandInput {
+    # 名称
+    name: String!
+    # 缩略图
+    thumbnail: String!
+    # 描述
+    description: String
+    # 品牌类型
+    brand_type: BrandType!
+    # 挖掘机型号
+    # machine_types: [String!]
+    # 排序
+    sort_order: Int
+    # 上传商品时二手价格在批发价上的上浮比率（介于0到1之间）
+    second_price_ratio: Float!
+    # 上传商品时售价在批发价上的上浮比率 （介于0到1之间）
+    retail_price_ratio: Float!
+}
+
+enum BrandType {
+    excavator
+    part
+}

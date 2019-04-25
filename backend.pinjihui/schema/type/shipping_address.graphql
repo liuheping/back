@@ -1,0 +1,27 @@
+
+# 配送地址数据结构
+type ShippingAddress {
+    id: ID!
+    # 电话
+    mobile: String!
+    # 姓名
+    consignee: String!
+    # 地址
+    address: Address!
+    # 邮编
+    zipcode: String
+    # 是否默认
+    isDefault: Boolean!
+}
+
+# 创建配送地址输入
+input ShippingAddressInput {
+    # 电话
+    mobile: String!
+    # 姓名
+    consignee: String!
+    # 地址
+    address: AddressInput!
+    # 邮编
+    zipcode: String
+}

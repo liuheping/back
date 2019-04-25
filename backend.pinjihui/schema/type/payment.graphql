@@ -1,0 +1,33 @@
+type Payment {
+    id: ID!
+    # 支付方式名
+    payName: String!
+    # 支付方式代码，全局唯一
+    payCode: String!
+    # 支付费用
+    payFee: String
+    # 支付方式描述
+    payDesc: String
+    # 排序
+    sortOrder: Int
+    # 是否启用
+    enabled: Boolean!
+    # 是否在线支付
+    isOnline: Boolean!
+    # 是否货到付款
+    isCod:Boolean!
+}
+
+# 创建支付方式输入
+input PaymentInput {
+    # 名称
+    payName: String!
+    # 支付方式的英文缩写,其实是该支付方式处理插件的不带后缀的文件名部分
+    payCode: String!
+    # 支付费用
+    payFee: String
+    # 描述
+    payDesc: String
+    # 排序
+    sortOrder: Int
+}

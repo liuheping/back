@@ -1,0 +1,31 @@
+type MerchantProfile {
+    userId: String!
+    socialId: String
+    repName: String
+    companyName: String
+    companyAddress: Address
+    deliveryAddress: Address
+    licenseImage: String
+    companyImage: [String!]
+    takeCash: [TakeCash!]
+    shippingAddress: [ShippingAddress!]
+    lat: String
+    lng: String
+    balance: Float!
+    logo: String
+    telephone: String
+}
+
+input ProfileInput {
+    repName: String
+    socialId: String
+    companyName: String
+    companyAddress: AddressInput
+    deliveryAddress: AddressInput
+    licenseImage: String
+    companyImage: [String!]
+    lat: String
+    lng: String
+    logo: String
+    telephone: String
+}

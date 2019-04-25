@@ -1,0 +1,20 @@
+type Category {
+    id: ID!
+    name: String!
+    parentId: ID
+    sortOrder: Int
+    # 缩略图
+    thumbnail: String
+    childrent: [Category!]
+    enabled: Boolean!
+    createdAt: Time!
+    updatedAt: Time!
+    is_common: Boolean!
+}
+
+input CategoryInput{
+    name: String!
+    parentId: String
+    thumbnail: String
+    is_common: Boolean!
+}

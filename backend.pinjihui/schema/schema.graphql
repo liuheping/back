@@ -1,0 +1,254 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Query {
+    # 获取统计信息
+    GetStatistic: Statistic
+    # 获取当前用户的客服列表
+    findWaitersByMerchantID:[Waiter!]
+    # 获取所有客服
+    waiters(first: Int, offset: Int, search: WaiterSearchInput, sort: WaiterSortInput): WaiterConnection!
+    # 根据ID获取客服
+    waiter(id: ID!): Waiter
+    # 根据机型获取品牌
+    brandByMachine(machineType: String!): Brand
+    # 获取所有广告
+    ads: [Ad!]
+    # 根据ID获取广告
+    ad(id: ID!): Ad
+    # 查找广告位置选项
+    findAdPosition: String
+    # 获取图片域名
+    getImageHost: String!
+    # 操作日志列表
+    operationLogs(first: Int, offset: Int, search: OperationLogSearchInput, sort: OperationLogSortInput): OperationLogConnection!
+    # 单个日志
+    operationLog(id: ID!): OperationLog
+    # 获取所有秒杀
+    spikes: [Spike!]
+    # 根据ID获取秒杀
+    spike(id: ID!): Spike
+    # 七牛上传图片的凭证, @module:上传文件所属模块, @ext:文件拓展名
+    qiniuUploadToken(module: Module!, ext: FileExt!): QiniuUploadToken!
+    # 根据ID获取提现申请
+    cashRequest(id: ID!): CashRequest
+    # 获取所有提现申请记录
+    cashRequests:[CashRequest!]
+    # 获取所有优惠券
+    coupons: [Coupon!]
+    # 根据ID获取优惠券
+    coupon(id: ID!): Coupon
+    # 获取所有配置信息
+    configs: [Config]
+    # 根据ID获取配置
+    config(id: ID!): Config
+    # 获取所有支付方式
+    payments: [Payment]
+    # 根据ID获取品牌
+    payment(id: ID!): Payment
+    # 通过商品ID获取上传商家信息
+    FindMerchantsByProductID(productID: ID!):MerchantProfile
+    # 根据商品ID获取商品图片
+    ProductImages(id: ID!):[ProductImage]
+    # 根据商家ID和商品ID查看库存信息
+    stocks(search: StockSearchInput): [Stock!]
+    # 获取所有属性集合
+    attributesets: [AttributeSet!]
+    # 根据ID集合获取属性集合
+    attributesByIds(ids:[String!]): [Attribute!]
+    # 根据ID获取属性集合
+    attributeset(id: ID!): AttributeSet
+    # 获取所有属性
+    attributes: [Attribute!]
+    # 根据ID获取属性
+    attribute(id: ID!): Attribute
+    # 分类列表, 顶级
+    categories: [Category!]
+    # 根据ID查找分类
+    category(id: ID!):Category
+    # 获取所有品牌
+    brands: [Brand]
+    # 根据ID获取品牌
+    brand(id: ID!): Brand
+    # 根据父ID获取地区列表
+    regions(pid: Int): [Region]
+    # 获取提款资料列表
+    takecashs: [TakeCash]
+    # 当前会话用户
+    me: User
+    # 登录接口
+    login(mobile: String!, password: String!): User
+    # 用户列表
+    users(first: Int, offset: Int, search: UserSearchInput, sort: UserSortInput): UsersConnection!
+    # 根据id 获取用户
+    user(id: ID!): User
+    # 获取当前会话商户资料
+    merchantprofiles: MerchantProfile  
+    # 根据id获取收货地址
+    myAddress(id: ID!): ShippingAddress
+    # 获取登陆用户所有收货地址
+    myAllAddress:[ShippingAddress]
+    # 分页的产品列表接口, @first: 返回前 first 条记录, @offset: 游标, 返回offset之后的记录. @search: 指定筛选条件
+    products(first: Int, offset: Int, search: ProductSearchInput, sort: ProductSortInput): ProductsConnection!
+    # 单个产品
+    product(id: ID!): Product
+    # 加盟商所在区域的订单列表接口, @first: 返回前 first 条记录, @offset: 游标, 返回offset之后的记录. @search: 指定筛选条件
+    ordersByArea(first: Int, offset: Int, search: OrderSearchInput, sort: OrderSortInput): OrdersConnection!
+    # 分页的订单列表接口, @first: 返回前 first 条记录, @offset: 游标, 返回offset之后的记录. @search: 指定筛选条件
+    orders(first: Int, offset: Int, search: OrderSearchInput, sort: OrderSortInput): OrdersConnection!
+    # 单个订单
+    order(id: ID!): Order
+    # 评论列表
+    comments(first: Int, offset: Int, search: CommentSearchInput, sort: CommentSortInput): CommentsConnection!
+    # 单个评论
+    comment(id: ID!): Comment
+    # 根据商品ID查找所有评论
+    findCommentsByProductID(productID:ID!):[Comment!]
+    # 所有支付方式
+    payments: [Payment]
+    # 支付方式详情
+    payment(id: ID!): Payment
+    # 获取所有配置信息
+    configs: [Config]
+}
+
+
+
+
+type Mutation {
+    # 删除物流信息
+    DeleteShippingInfo(ID: ID!): Boolean!
+    # 更新物流信息
+    UpdateShippingInfo(id:ID!, info: ShippingInfoInput!): ShippingInfo!
+    # 添加物流信息
+    CreateShippingInfo(info: ShippingInfoInput!): ShippingInfo!
+    # 设置商品上下架
+    setProductIsSale(ID: ID!): Boolean!
+    # 删除第三方客服后进行标记
+    saydeleteFromZhiMa(ID: ID!): Boolean!
+    # 审核客服
+    checkWaiter(ID: ID!, waiter_id: ID!, remark: String): Boolean!
+    # 删除客服
+    deleteWaiter(ID: ID!): Boolean!
+    # 添加客服
+    createWaiter(NewWa:WaiterInput!): Waiter
+    # 更新客服
+    updateWaiter(id: ID!, NewWa:WaiterInput!): Waiter
+    # 删除系列号
+    deleteBrandSeries(ID: ID!): Boolean!
+    # 创建系列号
+    createBrandSeries(series:BrandSeriesInput!): BrandSeries
+    # 更新系列号
+    updateBrandSeries(id: ID!, series:BrandSeriesInput!): BrandSeries
+    # 设置广告是否显示
+    setAdIsShow(ID: ID!): Boolean!
+    # 删除广告
+    deleteAd(ID: ID!): Boolean!
+    # 更新广告
+    updateAd(id:ID!, ad: AdInput!): Ad!
+    # 添加广告
+    createAd(ad: AdInput!): Ad!
+    # 审核商家（资料）
+    checkMerchant(ID: ID!): Boolean!
+    # 供货商设置售价
+    setReatilPriceByAlly(ID: ID!, price: Float!): Product!
+    # 添加秒杀
+    createSpike(spike: SpikeInput!): Spike!
+    # 更新秒杀
+    updateSpike(ID: ID!, spike: SpikeInput!): Spike!
+    # 商家确认提现完成
+    finishedCash(id: ID!): Boolean!
+    # 管理员设置提现状态为已打款
+    paidCash(id: ID!, reply: String!): Boolean!
+    # 管理员拒绝提现
+    refusedCash(id: ID!, reply: String!): Boolean!
+    # 提现申请
+    applyCash(info:CashRequestInput!): CashRequest!
+    # 设置订单状态——>发货
+    setOrderStatus(id: ID!, status: OrderStatusUpdate!): Boolean!
+    # 删除优惠券
+    deleteCoupon(ID: ID!): Boolean!
+    # 创建优惠券
+    createCoupon(cou:CouponInput!): Coupon
+    # 更新优惠券
+    updateCoupon(ID: ID!, cou:CouponInput!): Coupon
+    # 设置默认收货地址
+    setDefaultAddress(id: ID!) : Boolean!
+    # 删除收货地址
+    deleteAddress(id: ID!): Boolean!
+    # 删除配置
+    deleteConfig(ID: ID!): Boolean!
+    # 创建配置
+    createConfig(NewCon:ConfigInput!): Config
+    # 更新配置信息
+    updateConfig(id: ID!, NewCon:ConfigInput!): Config
+    # 删除支付方式
+    deletePayment(ID: ID!): Boolean!
+    # 创建支付方式
+    createPayment(NewPay:PaymentInput!): Payment
+    # 更新支付方式
+    updatePayment(id: ID!, NewPay:PaymentInput!): Payment
+    # 更新商品
+    updateProduct(ID:ID!,NewPro:ProductUpdateInput!):Product
+    # 创建商品
+    createProduct(NewPro:ProductInput!):Product
+    # 删除商品
+    deleteProduct(ID: ID!): Boolean!
+    # 回复评论
+    commentReply(ID: ID!,content:String!):Comment!
+    # 根据ID设置评论是否可见
+    commentIsShow(commentID:ID!):Boolean!
+    # 删除属性集合
+    deleteAttributeSet(ID: ID!): Boolean!
+    # 更新属性集
+    updateAttributeSet(ID: ID!,NewAttrSet: AttributeSetInput!): AttributeSet
+    # 创建属性集
+    createAttributeSet(NewAttrSet: AttributeSetInput!): AttributeSet
+    # 删除属性
+    deleteAttribute(ID: ID!): Boolean!
+    # 更新属性
+    updateAttribute(ID: ID!,newAttr: AttributeInput!): Attribute
+    # 创建属性
+    createAttribute(newAttr: AttributeInput!): Attribute
+    # 创建分类
+    createCategory(newCat: CategoryInput!): Category
+    # 更新分类
+    updateCategory(ID: ID!,newCat: CategoryInput!): Category
+    # 删除分类
+    deleteCategory(ID: ID!): Boolean!
+    # 删除品牌
+    deleteBrand(ID: ID!): Boolean!
+    # 创建品牌
+    createBrand(newBrand:BrandInput!): Brand
+    # 更新品牌
+    updateBrand(id: ID!, newBrand:BrandInput!): Brand
+    # 创建收货地址
+    createAddress(newAddr: ShippingAddressInput!) : ShippingAddress
+    # 更新收货地址
+    updateAddress(id: ID!, newAddr: ShippingAddressInput!) : ShippingAddress
+    # 注册
+    register(mobile: String!, password: String!, type: RegisterUserType!, code: String!): User
+    # 找回密码
+    retrievePassword(mobile: String!,code: String!,newpassword: String!): Boolean!
+    # 修改密码
+    changePassword(oldpassword: String!,newpassword: String!): Boolean!
+    # 更新会话商户基础资料
+    updateProfile(profile: ProfileInput!): MerchantProfile
+    # 修改提款资料,没有就添加一条，有就直接修改
+    updateTakeCash(debitcard: TakeCashInput!):TakeCash
+}
+
+#排序方式 升序或降序
+enum SortType {
+    asc
+    desc
+}
+
+# 后台用户注册时的可选类型
+enum RegisterUserType {
+    provider
+    ally
+    agent
+}

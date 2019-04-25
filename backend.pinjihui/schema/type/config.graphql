@@ -1,0 +1,21 @@
+type Config {
+    id: ID!
+    # 配置名
+    name: String!
+    # 代码，全局唯一
+    code: String!
+    # 值
+    value: String!
+    # 排序
+    sortorder: Int
+    description: String
+}
+
+# 创建配置输入
+input ConfigInput {
+    name: String!
+    code: String!
+    value: String!
+    sortorder: Int
+    description: String
+}

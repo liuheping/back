@@ -1,0 +1,27 @@
+type BrandSeries {
+    id: ID!
+    # 品牌ID
+    brand_id: ID!
+    # 系列号
+    series: String!
+    # 图片
+    image: String
+    # 机型
+    machine_types:[String!]!
+    # 排序
+    sort_order: Int!
+}
+
+# 创建系列号输入
+input BrandSeriesInput {
+    # 品牌ID
+    brand_id: String!
+    # 系列号
+    series: String!
+    # 图片
+    image: String
+    # 机型
+    machine_types:[String!]!
+    # 排序
+    sort_order: Int
+}

@@ -1,0 +1,125 @@
+type Product {
+    id: ID!
+    name: String
+    # 是否在售
+    isSale: Boolean
+    attributeSet: AttributeSet
+    # 价格
+    price: Price
+    category: Category
+    relatedIds: [ID!]
+    # 详情
+    content: String
+    brand: Brand
+    deleted: Boolean
+    createdAt: Time
+    updatedAt: Time
+    # 标签
+    tags: [String!]
+    # machineTypes: [String!]
+    machineTypes: [Brand]
+    productImages: [ProductImage!]
+    # 库存
+    stock: Int
+    # 销量
+    sales_volume: Int
+    # 收藏数
+    favorites: Int
+    attrs: String
+    comments: [Comment]
+    # 规格名称1
+    specName1: String
+    # 规格名称2
+    specName2: String
+    # 规格值1
+    spec1: String
+    # 规格值2
+    spec2: String
+    parentId: String
+    type: String!
+    # 邮费
+    shippingFee: Float
+    Children:[Product]
+}
+
+union Price = ProviderPrice | AdminPrice | AllyPrice
+
+type ProviderPrice {
+    price: Float
+}
+
+type AllyPrice {
+    retailprice: Float
+    secondPrice: Float
+}
+
+type AdminPrice {
+    # 批发价
+    batchPrice: Float
+    # 二手价
+    secondPrice: Float
+    # 售价
+    retailPrice: Float
+}
+
+
+# 创建商品输入
+input ProductInput {
+    name: String!
+    attributeSetID: ID
+    batchPrice: Float
+    stock: Int
+    shippingFee: Float
+    categoryID:ID!
+    relatedIds:[ID!]
+    content:String
+    brandID:ID!
+    tags: [String!]
+    machine_types: [String!]
+    attrs: String
+    images: [String!]
+    spec_1_name: String
+    spec_2_name: String
+    spec: [SpecInput!]
+}
+
+
+# 更新商品输入
+input ProductUpdateInput {
+    name: String!
+    attributeSetID: ID
+    batchPrice: Float
+    stock: Int
+    shippingFee: Float
+    categoryID:ID!
+    relatedIds:[ID!]
+    content:String
+    brandID:ID!
+    tags: [String!]
+    machine_types: [String!]
+    attrs: String
+    images: [String!]
+    spec_1_name: String
+    spec_2_name: String
+    spec: [SpecUpdateInput!]
+}
+
+
+# 排序依据枚举
+enum ProductOrderBy {
+    batch_price
+    created_at
+}
+
+# 产品排序参数结构
+input ProductSortInput {
+    orderBy: ProductOrderBy!
+    sort: SortType
+}
+
+# 产品搜索数据结构
+input ProductSearchInput {
+    key: String
+    brand: ID
+    category: ID
+}

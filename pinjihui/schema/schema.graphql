@@ -1,0 +1,227 @@
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+# 查询 root
+type Query {
+    # 登录
+    login(mobile: String!, password: String!, code: String): User
+    # 未登陆用户将创建一个用户关联code对应的openid.已登陆的手机用户将关联到此openid
+    wxLogin(code: String!): User
+    # 获取当前用户信息
+    me: User
+
+    # 根据id获取用户收货地址
+    myAddress(id: ID!): ShippingAddress
+    # 我的代金券
+    myCoupons(status: CouponStatus!): [Coupon!]!
+    # 代金券分页
+    coupons(first: Int, after: ID, status: CouponStatus!): CouponsConnection!
+    # 分页的产品列表接口, @first: 返回前 first 条记录, @after: 游标, 返回after之后的记录. @search: 指定筛选条件
+    products(first: Int, after: ID, search: ProductSearchInput, sort: ProductSortInput): ProductsConnection!
+    # 产品详情
+    product(id: ID!, merchantID: ID): Product
+    # 根据id获取商家信息
+    merchant(id: ID!): Merchant
+    merchants(first: Int, after: ID, orderBy: MerchantsOrderBy!, position: Location): MerchantsConnection!
+    # 获取前n个品牌
+    brands(type: BrandType!, first: Int, merchantID: ID, cateID: ID): [Brand]
+    # 机型
+    machineTypes(series: ID!): [String!]!
+    # 分类列表, 顶级
+    categories(machineTypeSeries: ID, merchantID: ID, parentID: ID): [Category!]!
+    # 购物车商品
+    cart: [CartItem!]!
+    # 购物车商品总数
+    cartTotalCount: Int!
+    # 获取行政区域
+    regions(parent: Int): [Region!]!
+    # 结算
+    checkout(ids: [ID!]!): Checkout!
+    # 订单
+    orders(status: OrderStatus, first: Int, after: ID): OrdersConnection!
+    order(id: ID!): Order
+    # 已购买的商品
+    myProducts(first: Int, after: ID, hasCommented: Boolean!): OrderProductItemConnnection!
+    # 评论列表, rank: 评论等级,1差评,2中评,3好评
+    commentList(first: Int, after: ID, productID: ID!, merchantID: ID!, rank: Int): CommentsConnection!
+    # 评价详情
+    comment(id: ID!): Comment
+    # 七牛上传图片的凭证, @module:上传文件所属模块, @ext:文件拓展名
+    qiniuUploadToken(module: Module!, ext: FileExt!): QiniuUploadToken!
+    # 秒杀列表
+    spikeList(first: Int, after: ID): SpikeConnection!
+    # 收藏列表
+    myFavorites(first: Int, after: ID, type: FavoriteType!): FavoritesConnection!
+    # 广告图列表
+    ads(position: ADPOptions!, merchantID: String): [AD!]!
+}
+
+type Mutation {
+    # 新注册用户领取优惠券
+    receiveCoupon(inviteCode: String!): Boolean!
+    # 注册
+    register(mobile: String!, password: String!): User
+    # 创建地址
+    createAddress(newAddr: ShippingAddressInput!) : ShippingAddress
+    # 更新地址
+    updateAddress(id: ID!, newAddr: ShippingAddressInput!) : ShippingAddress
+    # 设置默认地址
+    setDefaultAddress(id: ID!) : Boolean!
+    # 删除地址
+    deleteAddress(id: ID!): Boolean!
+    # 添加商品至购物车
+    addToCart(item: CartItemInput!) : CartItem
+    # 更新购物车中商品数量
+    updateCountInCart(id: ID!, count: Int!): CartItem
+    # 删除购物车商品
+    deleteCartItem(id: ID!): Boolean!
+    # 创建订单,@shippingAddrID:收货地址, @itemID:购物车项, @smOpt:每个商家的配送和留言选项, @usedCoupon:优惠券 ID, 没有则填 null, @invOpt:发票选项
+    createOrder(
+        shippingAddrID: ID!
+        itemID: [ID!]!
+        smOpt: [shppingMethodOption!]!
+        usedCoupon: [ID!]
+        invOpt: InvOpt
+    ): Order
+    # 取消订单
+    cancelOrder(id: ID!): Boolean!
+    # 确认收货
+    confirmReceipt(id: ID!): Boolean!
+    # 创建评论
+    createComment(newComment: CommentInput!): Comment!
+    # 添加收藏.如果收藏的是店铺，则不传@productID
+    addFavorite(merchantID: ID!,productID: ID): Favorite!
+    # 删除收藏.@id 收藏id
+    removeMyLove(id: ID!): Boolean!
+    # 保存微信用户信息
+    saveWxUserInfo(wxUserInfo: WxUser!): Boolean!
+    # 领取分享优惠券,分享者和被分享者输入不同的 @type
+    receiveShareCoupon(type: CouponType!): Boolean!
+    # 增加商品阅读量
+    viewProduct(merchantID: ID!,productID: ID!): Boolean!
+    # 绑定手机
+    bindPhoneNumber(number: String!): Boolean!
+    # 代理商上架商品
+    agentPurchase(productID: ID!): Boolean!
+    # 代理商下架商品
+    agentUnPurchase(productID: ID!): Boolean!
+}
+
+input WxUser {
+    nickName: String!
+    gender: Int!
+    language: String
+    city: String
+    province: String
+    country: String
+    avatarUrl: String
+}
+
+# 添加到购物车输入结构
+input CartItemInput {
+    productID: ID!
+    productCount: Int!
+    merchantID: ID!
+}
+
+# 产品搜索数据结构
+input ProductSearchInput {
+    # 搜索关键字
+    key: String
+    # 部件品牌 ID
+    brand: ID
+    # 分类ID
+    category: ID
+    # 商家ID
+    merchant: ID
+    # 机型
+    machineType: String
+    # 机型系列ID
+    machineTypeSeries: ID
+}
+
+# 产品排序参数结构
+input ProductSortInput {
+    # position
+    position: Location
+    # 排序依据
+    orderBy: ProductOrderBy!
+    # 排序方式,升序或降序
+    sort: SortType
+}
+
+# 排序依据枚举, 其中synthesis,sale_volume,distance 应只允许降序
+enum ProductOrderBy {
+    # 综合
+    synthesis
+    # 销量
+    sales_volume
+    price
+    distance
+    # 上架时间
+    created_at
+}
+
+#排序方式 升序或降序
+enum SortType {
+    # 升序
+    asc
+    # 降序
+    desc
+}
+
+enum MerchantsOrderBy {
+    # 销量
+    sales_volume
+    # 距离
+    distance
+    # 评价
+    comment_quantity
+}
+
+input Location {
+    lat: Float!
+    lng: Float!
+}
+
+# 广告位置枚举
+enum ADPOptions {
+    # 首页大图
+    index_banner
+    # 首页秒杀
+    index_spike
+    # 店铺首页
+    store_index
+    # 首页品牌轮播图
+    index_brand_banner
+}
+
+enum FavoriteType {
+    product
+    store
+}
+enum Module {
+    comment
+}
+
+enum FileExt {
+    jpg
+    png
+}
+
+# 七牛上传凭证
+type QiniuUploadToken {
+    # token
+    token: String!
+    # 上传路径 需要回传给业务服务器.此字段可以不用添加到上传表单中.上传成功后会返回此字段
+    key: String!
+}
+
+enum CouponType {
+    # 分享人领取的优惠券
+    for_sharer
+    # 被分享人领取的优惠券
+    for_be_sharer
+}

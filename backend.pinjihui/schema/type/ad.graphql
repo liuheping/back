@@ -1,0 +1,23 @@
+type Ad {
+    id: ID!
+    # 图片链接
+    image: String!
+    # 活动链接
+    link: String
+    # 所属商家（空为平台）
+    merchant: MerchantProfile
+    # 广告位置
+    position: String!
+    # 排序，越小越靠前
+    sort: Int!
+    # 是否显示
+    isshow: Boolean!
+}
+
+# 创建广告输入
+input AdInput {
+    image: String!
+    link: String
+    position: String!
+    sort: Int!
+}

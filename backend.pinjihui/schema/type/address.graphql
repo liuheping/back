@@ -1,0 +1,27 @@
+type Address {
+    # provinceId: Int!
+    # cityId: Int!
+    # 区ID
+    areaId: Int!
+    # 省市区名称
+    regionName: String
+    # 详细地址
+    address: String!
+}
+
+# 地址输入
+# input DaddressInput {
+#     areaId: Int!
+#     # 区县后的详细地址, 如 xx街xx号
+#     address: String!
+# }
+
+input AddressInput {
+    # provinceId:Int!
+    # cityId:Int!
+    # 区ID
+    areaId:Int!
+    # regionName:String
+    # 详细地址
+    address:String!
+}

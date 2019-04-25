@@ -1,0 +1,5 @@
+type OperationLogConnection {
+    totalCount: Int!
+    edges: [OperationLogEdge]
+    pageInfo: PageInfo!
+}

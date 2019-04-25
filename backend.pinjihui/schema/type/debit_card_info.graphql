@@ -1,0 +1,21 @@
+type DebitCardInfo {
+    # 持卡人
+    cardHolder: String!
+    # 银行名称
+    bankName: String!
+    # 银行卡号
+    cardNumber: String!
+    province: Int!
+    city: Int!
+    # 支行
+    branch: String!
+}
+
+input DebitCardInput {
+    cardHolder:String!
+	bankName:String!
+	cardNumber:String!
+	provinceId:Int!
+	cityId:Int!
+	branch:String!
+}

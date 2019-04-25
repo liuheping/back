@@ -1,0 +1,5 @@
+type WaiterConnection {
+    totalCount: Int!
+    edges: [WaiterEdge]
+    pageInfo: PageInfo!
+}

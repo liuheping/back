@@ -1,0 +1,9 @@
+# 产品商家边结构
+type EdegProductMerchant {
+    # 所属商家
+    merchant: Merchant!
+    # 库存数量
+    stock: Int!
+    price: Float!
+    distance: String!
+}

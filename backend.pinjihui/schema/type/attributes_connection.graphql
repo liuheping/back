@@ -1,0 +1,5 @@
+type AttributesConnection {
+    totalCount: Int!
+    edges: [AttributesEdge]
+    pageInfo: PageInfo!
+}

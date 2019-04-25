@@ -1,0 +1,31 @@
+# 品牌数据结构
+type Brand {
+    id: ID!
+    # 品牌名
+    name: String!
+    # 缩略图
+    thumbnail: String!
+    # 关于品牌的描述
+    description: String
+    machineTypes: [String!]!
+    machineTypeSeries: [MachineTypeSeries!]!
+}
+
+# 品牌类型枚举
+enum BrandType {
+    # 配件
+    part
+    # 挖掘机
+    excavator
+}
+
+# 机型系列结构
+type MachineTypeSeries {
+    id: ID!
+    # 系列名称
+    name: String!
+    # 系列配图
+    image: String
+    # 机型列表
+    machineTypes: [String!]!
+}

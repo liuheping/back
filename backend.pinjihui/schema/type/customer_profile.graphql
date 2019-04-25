@@ -1,0 +1,4 @@
+type CustomerProfile {
+    shippingAddress: [ShippingAddress!]
+    wechartProfile: WechartProfile
+}

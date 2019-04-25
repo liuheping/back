@@ -1,0 +1,4 @@
+type ShippingMethod {
+    id: ID!
+    name: String!
+}

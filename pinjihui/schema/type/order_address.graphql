@@ -1,0 +1,10 @@
+# 订单收货地址结构
+type OrderAddress {
+    mobile: String!
+    # 收货人姓名
+    consignee: String!
+    # 地理地址
+    address: String!
+    # 邮编
+    zipcode: String
+}

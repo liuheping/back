@@ -1,0 +1,96 @@
+# 订单数据结构
+type Order {
+    id: ID!
+    # 订单状态
+    orderStatus: OrderStatus!
+    # 子订单
+    children: [Order!]
+    # 订单收货地址
+    address: OrderAddress!
+    # 订单商家
+    merchant: Merchant
+    # 商品
+    products: [OrderProductItem!]
+    # 配送方法
+    shippingName: String
+    # 支付方式
+    payName: String!
+    # 订单金额
+    amount: String!
+    # 应付金额
+    orderAmount: String!
+    # 优惠金额
+    offerAmount: String!
+    # 下单时间
+    createdAt: Time!
+    # 支付时间
+    payTime: Time
+    # 发货时间
+    shippingTime: Time
+    # 微信支付参数
+    wechartPayParams: WechartPayParams
+    # 物流信息
+    shippingInfo: ShippingInfo
+    # 商品件数
+    productQuantity: Int!
+}
+
+type ShippingInfo {
+    company: String
+    number: String
+    # 运单图片
+    images: [String!]
+}
+
+# 订单状态枚举
+enum OrderStatus {
+    # 未支付/待付款
+    unpaid
+    # 已支付/待发货
+    paid
+    # 已发货/待收货
+    shipped
+    # 已完成
+    finish
+    # 取消
+    cancelled
+    # 无效
+    invalid
+    # 已退货
+    returned
+    # 退货中
+    returning
+}
+
+# 每个商家及其对应的配送方式和消息
+input shppingMethodOption {
+    merchantID: ID!
+    shippingMethod: ShippingMethodType!
+    message: String
+}
+
+# 配送方式
+enum ShippingMethodType {
+    # 自提
+    getBySelf
+    # 大件物流
+    bigPackage
+}
+
+# 发票相关输入
+input InvOpt {
+    # 发票抬头
+    invPayee: String
+    # 发票类型
+    invType: InvType!
+    # 纳税人识别号
+    invTaxpayer: String
+}
+
+# 发票类型
+enum InvType {
+    # 个人
+    personal
+    # 单位
+    org
+}

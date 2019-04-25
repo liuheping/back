@@ -1,0 +1,12 @@
+type WechartProfile {
+    openid: ID!
+    nickname: String!
+    gender: Int!
+    language: String
+    city: String
+    province: String
+    county: String
+    # 头像
+    avatarUrl: String
+    user: User
+}

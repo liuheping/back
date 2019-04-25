@@ -1,0 +1,47 @@
+type Comment {
+    id: ID!
+    user: User!
+    product: Product!
+    # 商品星级
+    rank: Int
+    order: Order!
+    # 评论内容详情
+    content: String!
+    createdAt: Time!
+    # 回复
+    reply: String
+    replyTime: Time
+    isShow: Boolean!
+    userIp: String
+    # 快递星级
+    shippingRank: Int
+    # 服务星级
+    serviceRank: Int
+    # 评论时上传的图片
+    images: [String!]
+    # 更新时间
+    updatedAt: Time!
+    # 是否匿名
+    isAnonymous: Boolean!
+}
+
+# 排序依据枚举
+enum CommentOrderBy {
+    created_at
+}
+
+# 评论排序参数结构
+input CommentSortInput {
+    orderBy: CommentOrderBy!
+    sort: SortType
+}
+
+# 评论搜索数据结构
+input CommentSearchInput {
+    key: String
+    userID: ID
+    productID: ID
+    orderID: ID
+    merchantID: ID
+    isShow: Boolean
+}
